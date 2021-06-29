@@ -1,0 +1,25 @@
+<?php
+
+require 'phpQuery.php'; // подключаем библиотеку
+
+$url = 'https://ecs.sudrf.ru/appeals/'; // заходим на судрф логин
+$ch = curl_init(); // включаем курл функции
+
+            curl_setopt($ch, CURLOPT_URL, $url); // отправляем на
+            curl_setopt($ch, CURLOPT_HEADER, 0); // пустые заголовки
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // возвратить то что вернул сервер
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // следовать за редиректами
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);// таймаут4
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// просто отключаем проверку сертификата
+            curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__).'/cookie.txt'); // сохранять куки в файл
+            curl_setopt($ch, CURLOPT_COOKIEFILE,  dirname(__FILE__).'/cookie.txt');
+            curl_setopt($ch, CURLOPT_POST, 1); // использовать данные в post
+            curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+      'authMngr[op]'=>'login',
+      'authMngr[iprov]'=>'Local',
+      'authMngr[uname]'=> 'cc@50RS0001',
+      'authMngr[passwd]'=>'qiXUNBzXeE',
+
+    ));
+curl_exec($url);
+?>
